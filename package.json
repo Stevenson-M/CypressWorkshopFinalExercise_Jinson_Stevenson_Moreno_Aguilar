@@ -1,0 +1,27 @@
+{
+  "name": "cypressworkshopfinalexercise_jinson_stevenson_moreno_aguilar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cypress run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Stevenson-M/CypressWorkshopFinalExercise_Jinson_Stevenson_Moreno_Aguilar.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Stevenson-M/CypressWorkshopFinalExercise_Jinson_Stevenson_Moreno_Aguilar/issues"
+  },
+  "homepage": "https://github.com/Stevenson-M/CypressWorkshopFinalExercise_Jinson_Stevenson_Moreno_Aguilar#readme",
+  "devDependencies": {
+    "cypress": "^9.7.0",
+    "cypress-cucumber-preprocessor": "^4.3.1"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
+  }
+}
