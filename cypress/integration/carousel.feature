@@ -20,6 +20,17 @@ Feature: Carousel check
         When I click in the right arrow of the carousel
         Then I verify if the carousel is moving to the right
 
+    Scenario: Check the navbar header
+        Then I verify that the navbar header is present
+
+    Scenario: Check if the Header navbar has the correct items
+        Then I verify that the navbar header has the correct items
+
+    Scenario: Check if the car button in the navbar works
+        When I click in the car button in the navbar
+        Then I verify that the page is the cart page
+
+
 
 
 
