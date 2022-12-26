@@ -5,17 +5,13 @@ var pageLocators = {
     carouselImagesIndicators: "ol.carousel-indicators li",
     carouselImagesIndicatorsActive: "ol li.active",
 
+    navbar: "#navbarExample",
 }
 
-
-class HomePage {
+class CarouselModule {
 
     getCarousel() {
         return cy.get(pageLocators.carousel)
-    }
-
-    getCarouselImagesIndicators() {
-        return cy.get(pageLocators.carouselImagesIndicators)
     }
 
     getLeftCarouselArrow() {
@@ -26,32 +22,14 @@ class HomePage {
         return cy.get(pageLocators.rightCarouselArrow)
     }
 
+    getCarouselImagesIndicators() {
+        return cy.get(pageLocators.carousel)
+    }
 
     getCarouselImagesIndicatorsActive() {
         return cy.get(pageLocators.carouselImagesIndicatorsActive)
     }
 
-    
-
-    clickLeftArrow() {
-        return this.getLeftCarouselArrow().click()       
-    }
-
-    clickRightArrow() {
-        return this.getRightCarouselArrow().click()
-    }
-
-    carouselActiveSlide(){
-        return this.getCarouselImagesIndicatorsActive().invoke('attr','data-slide-to')
-    }
-
-
-
-    
-
-    
 }
 
-export default HomePage;
-
-
+export default CarouselModule;
