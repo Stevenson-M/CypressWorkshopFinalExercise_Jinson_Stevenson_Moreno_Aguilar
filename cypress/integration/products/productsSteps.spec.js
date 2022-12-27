@@ -14,7 +14,7 @@ When('I click in a product', () => {
 
 And('I add the product to the cart', () => {
     productPage.clickAddToCartButton();
-    homePage.clickCartButton();
+    productPage.clickCartButton();
 })
 
 Then('I verify that the product is added to the cart successfully', () => {
@@ -24,7 +24,7 @@ Then('I verify that the product is added to the cart successfully', () => {
 When('I put a product in my shopping cart', () => {
     homePage.clickFirstProductCard();
     productPage.clickAddToCartButton();
-    homePage.clickCartButton();
+    productPage.clickCartButton();
 })
 
 Then('I verify that i can buy the products in the cart successfully', () => {

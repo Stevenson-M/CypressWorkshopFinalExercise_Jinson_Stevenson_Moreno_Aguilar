@@ -55,7 +55,7 @@ When('I click in the contact button in the navbar', () => {
 
 Then('I verify that the modal contact is present with the correct title', () => {
     homePage.getContactModal().should('be.visible')
-    homePage.cheackContactModalTitle().should('eq', 'New message')
+    homePage.checkContactModalTitle().should('eq', 'New message')
 
 })
 
@@ -65,7 +65,7 @@ When('I click in the about us button in the navbar', () => {
 
 Then('I verify that the modal about us is present with the correct title', () => {
     homePage.getAboutUsModal().should('be.visible')
-    homePage.cheackAboutUsModalTitle().should('eq', 'About us')
+    homePage.checkAboutUsModalTitle().should('eq', 'About us')
 })
 
 When('I click in the car button in the navbar', () => {
@@ -82,7 +82,7 @@ When('I click in the log in button in the navbar', () => {
 
 Then('I verify that the modal log in is present with the correct title', () => {
     homePage.getLogInModal().should('be.visible')
-    homePage.cheackLogInModalTitle().should('eq', 'Log in')
+    homePage.checkLogInModalTitle().should('eq', 'Log in')
 })
 
 When('I click in the sing up button in the navbar', () => {
@@ -91,7 +91,7 @@ When('I click in the sing up button in the navbar', () => {
 
 Then('I verify that the modal sing up is present with the correct title', () => {
     homePage.getSingUpModal().should('be.visible')
-    homePage.cheackLogInModalTitle().should('eq', 'Log in')
+    homePage.checkLogInModalTitle().should('eq', 'Log in')
 })
 
 // -------------------Navbar ------------------------- //

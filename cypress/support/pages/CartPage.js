@@ -1,5 +1,6 @@
-var pageLocators = {
+import NavbarHeaderModule from './modules/NavbarHeaderModule.js'
 
+var pageLocators = {
     tabbleCart: ".table-responsive",
     placeOrderButton: ".col-lg-1 > .btn",
     placeOrderModal: "#orderModal",
@@ -17,6 +18,10 @@ var pageLocators = {
 }
 
 class CartPage {
+
+    constructor() {
+        this.navbarHeaderModule =  new NavbarHeaderModule()
+    }
 
     getTabbleCart() { return cy.get(pageLocators.tabbleCart)}
 
@@ -41,6 +46,10 @@ class CartPage {
     getPurchaseMessageOrderModal() { return cy.get((pageLocators.purchaseMessageOrderModal))}
 
 
+    clickCartButton() {
+        return this.navbarHeaderModule.getCartButton().click()
+    }
+    
     getCartTableCount() {
         return this.getTabbleCart().find('#tbodyid').its('length')
     }
