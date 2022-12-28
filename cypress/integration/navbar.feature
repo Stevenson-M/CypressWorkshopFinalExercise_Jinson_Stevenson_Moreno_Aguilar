@@ -4,7 +4,6 @@ Feature: Navbvar Header check
 
     Background:
         Given I am on the main page of the demoblaze page
-        Then I verify if the page response is 200
 
     Scenario: Check the navbar header
         Then I verify that the navbar header is present

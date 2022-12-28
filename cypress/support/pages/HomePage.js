@@ -6,44 +6,42 @@ var pageLocators = {
     rightCarouselArrow: "a.carousel-control-next",
     carouselImagesIndicators: "ol.carousel-indicators li",
     carouselImagesIndicatorsActive: "ol li.active",
+    categories: '.list-group-item[href="#"]',
     categoriesTable: ".list-group",
     firstProductCard: ":nth-child(1) > .card > .card-block > .card-title > .hrefch",
 }
 
-
-
-
 class HomePage {
 
     constructor() {
-        this.navbarHeaderModule =  new NavbarHeaderModule()
+        this.navbarHeaderModule = new NavbarHeaderModule()
     }
 
 
     getCarousel() { return cy.get(pageLocators.carousel) }
 
-    getCarouselImagesIndicators() { return cy.get(pageLocators.carouselImagesIndicators)}
+    getCarouselImagesIndicators() { return cy.get(pageLocators.carouselImagesIndicators) }
 
-    getLeftCarouselArrow() { return cy.get(pageLocators.leftCarouselArrow)}
+    getLeftCarouselArrow() { return cy.get(pageLocators.leftCarouselArrow) }
 
     getRightCarouselArrow() { return cy.get(pageLocators.rightCarouselArrow) }
 
-    getCarouselImagesIndicatorsActive() { return cy.get(pageLocators.carouselImagesIndicatorsActive)}
+    getCarouselImagesIndicatorsActive() { return cy.get(pageLocators.carouselImagesIndicatorsActive) }
 
-    getNavbar() { return this.navbarHeaderModule.getNavbar()}
+    getNavbar() { return this.navbarHeaderModule.getNavbar() }
 
-    getContactModal() { return this.navbarHeaderModule.getContactModal()}
+    getContactModal() { return this.navbarHeaderModule.getContactModal() }
 
-    getAboutUsModal() { return this.navbarHeaderModule.getAboutUsModal()}
+    getAboutUsModal() { return this.navbarHeaderModule.getAboutUsModal() }
 
-    getLogInModal() { return this.navbarHeaderModule.getLogInModal()}
+    getLogInModal() { return this.navbarHeaderModule.getLogInModal() }
 
-    getSingUpModal() { return this.navbarHeaderModule.getSingUpModal()}
+    getSingUpModal() { return this.navbarHeaderModule.getSingUpModal() }
 
-    getCategoriesTable() { return cy.get(pageLocators.categoriesTable)}
+    getCategoriesTable() { return cy.get(pageLocators.categoriesTable) }
 
     getFirstProductCard() { return cy.get(pageLocators.firstProductCard) }
-   
+
 
     clickLeftArrow() {
         return this.getLeftCarouselArrow().click()
@@ -83,7 +81,11 @@ class HomePage {
     }
 
     checkUrl(url) {
-        return cy.url().should('include', url)
+        return cy.url().should('include', url);
+    }
+
+    checkUrlStatus(url) {
+        return cy.request(url).its('status')
     }
 
     clickLogInButton() {
@@ -101,10 +103,38 @@ class HomePage {
     checkSingUpModalTitle() {
         return this.navbarHeaderModule.getSingUpModalTitle().invoke('text')
     }
+    
+    getCategoriesTableText(index) {
+        return this.getCategoriesTable().find('.list-group-item').eq(index).invoke('text')
+    }
 
+    clickCategoriesTable(index) {
+        return this.getCategoriesTable().find('.list-group-item').eq(index).click()
+    }
 
-    getCategoriesTableText(entero) {
-        return this.getCategoriesTable().find('.list-group-item').eq(entero).invoke('text')
+    clickOnCategoty(index) {
+        cy.fixture('productsEndpoint').as('categoriesUrl');
+        cy.get("@categoriesUrl").then(categoriesUrl => {
+            cy.intercept('POST', categoriesUrl.categories).as('categoriesResponse');
+        });
+        return this.clickCategoriesTable(index)
+    }
+
+    getCategoriesResponse(cat) {
+        let products = [];
+        cy.wait('@categoriesResponse')
+            .then(response => {
+                products = response.response.body.Items;
+            })
+            .then(() => {
+                cy.wrap(products).as('products');
+            });
+
+        return cy.get('@products').then((products) => {
+            products.forEach(element => {
+                cy.wrap(element.cat).should('eq', cat);
+            });
+        });
     }
 
     clickFirstProductCard() {

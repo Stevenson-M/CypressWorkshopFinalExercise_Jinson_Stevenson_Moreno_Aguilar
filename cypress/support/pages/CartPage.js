@@ -1,7 +1,7 @@
 import NavbarHeaderModule from './modules/NavbarHeaderModule.js'
 
 var pageLocators = {
-    tabbleCart: ".table-responsive",
+    tabbleCart: ".col-lg-8",
     placeOrderButton: ".col-lg-1 > .btn",
     placeOrderModal: "#orderModal",
     nameInputOrderModal: "#name",
@@ -45,11 +45,13 @@ class CartPage {
 
     getPurchaseMessageOrderModal() { return cy.get((pageLocators.purchaseMessageOrderModal))}
 
+    getDeleteProductButton() { return cy.get(pageLocators.deleteProductButton)}
+
 
     clickCartButton() {
         return this.navbarHeaderModule.getCartButton().click()
     }
-    
+
     getCartTableCount() {
         return this.getTabbleCart().find('#tbodyid').its('length')
     }
@@ -90,8 +92,16 @@ class CartPage {
         return this.getPurchaseMessageOrderModal().find('.sa-success')
     }
 
-    checkOkPurchaseCheckTextOrderModal() {
-        return this.getPurchaseMessageOrderModal().find('.sweet-overlay').find('.sweet-alert > h2')
+    // checkOkPurchaseCheckTextOrderModal() {
+    //     return this.getPurchaseMessageOrderModal().find('.sweet-overlay').find('.sweet-alert > h2')
+    // }
+
+    clickDeleteProductButton() {
+        return this.getTabbleCart().find('.success > :nth-child(4) > a').click()
+    }
+
+    refreshPage() {
+        return cy.reload()
     }
 }
 
