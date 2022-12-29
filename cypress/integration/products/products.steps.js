@@ -74,7 +74,7 @@ Then('I verify that i can buy the products in the cart successfully', () => {
     cartPage.clickPurchaseModalButton();
 
     cartPage.checkOkPurchaseCheckImageOrderModal().should('be.visible')
-    // cartPage.checkOkPurchaseCheckTextOrderModal().should('be.visible')
+    cartPage.checkOkPurchaseCheckTextOrderModal().should('be.visible')
 })
 
 And('I delete the product from the cart', () => {

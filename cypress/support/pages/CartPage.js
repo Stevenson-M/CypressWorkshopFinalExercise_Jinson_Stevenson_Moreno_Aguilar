@@ -92,9 +92,9 @@ class CartPage {
         return this.getPurchaseMessageOrderModal().find('.sa-success')
     }
 
-    // checkOkPurchaseCheckTextOrderModal() {
-    //     return this.getPurchaseMessageOrderModal().find('.sweet-overlay').find('.sweet-alert > h2')
-    // }
+    checkOkPurchaseCheckTextOrderModal() {
+        return this.getPurchaseMessageOrderModal().find('body > div.sweet-alert.showSweetAlert.visible > h2')
+    }
 
     clickDeleteProductButton() {
         return this.getTabbleCart().find('.success > :nth-child(4) > a').click()

@@ -30,4 +30,3 @@ Feature: Navbvar Header check
     Scenario: Check if the sing up button in the navbar works
         When I click in the sing up button in the navbar
         Then I verify that the modal sing up is present with the correct title
-
