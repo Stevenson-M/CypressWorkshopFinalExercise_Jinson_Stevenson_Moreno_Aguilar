@@ -1,7 +1,6 @@
 import NavbarHeaderModule from './modules/NavbarHeaderModule.js'
 
 var pageLocators = {
-    tabbleCart: ".col-lg-8",
     placeOrderButton: ".col-lg-1 > .btn",
     placeOrderModal: "#orderModal",
     nameInputOrderModal: "#name",
@@ -12,8 +11,6 @@ var pageLocators = {
     yearInputOrderModal: "#year",
     purchaseButtonOrderModal: "#orderModal > .modal-dialog > .modal-content > .modal-footer > .btn-primary",
     purchaseMessageOrderModal: ".sweet-alert",
-
-    okPurchaseButtonOrderModal: ".confirm",
     deleteProductButton: ".success > :nth-child(4) > a",
 }
 
@@ -22,8 +19,6 @@ class CartPage {
     constructor() {
         this.navbarHeaderModule =  new NavbarHeaderModule()
     }
-
-    getTabbleCart() { return cy.get(pageLocators.tabbleCart)}
 
     getPlaceOrderButton() { return cy.get(pageLocators.placeOrderButton)}
 
@@ -52,8 +47,28 @@ class CartPage {
         return this.navbarHeaderModule.getCartButton().click()
     }
 
-    getCartTableCount() {
-        return this.getTabbleCart().find('#tbodyid').its('length')
+    getProductsInShoppingCart(amount) {
+
+        cy.fixture('productsEndpoint').as('productsEndpoint');
+
+        cy.get("@productsEndpoint").then(products => {
+            cy.intercept('POST', products.shoppingCartView).as('productsInShoppingCart');
+        });
+
+        let amountOfProductsInShoppingCart = [];
+
+        cy.wait('@productsInShoppingCart')
+        .then( response => {
+            amountOfProductsInShoppingCart =  response.response.body.Items.length;
+        })
+        .then( () => {
+            cy.wrap(amountOfProductsInShoppingCart).as('amountOfProductsInShoppingCart');
+        })
+        .then ( () => {
+             cy.get('@amountOfProductsInShoppingCart').then( (productsInShoppingCartAmount) => {
+             cy.wrap(productsInShoppingCartAmount).should('eq', amount)
+            })
+        })
     }
 
     clickPlaceOrderButton() {
@@ -92,16 +107,8 @@ class CartPage {
         return this.getPurchaseMessageOrderModal().find('.sa-success')
     }
 
-    checkOkPurchaseCheckTextOrderModal() {
-        return this.getPurchaseMessageOrderModal().find('body > div.sweet-alert.showSweetAlert.visible > h2')
-    }
-
     clickDeleteProductButton() {
-        return this.getTabbleCart().find('.success > :nth-child(4) > a').click()
-    }
-
-    refreshPage() {
-        return cy.reload()
+        return this.getDeleteProductButton().click()
     }
 }
 

@@ -1,4 +1,4 @@
-import { When, Then, And } from "cypress-cucumber-preprocessor/steps"
+import {Given, When, Then, And } from "cypress-cucumber-preprocessor/steps"
 import HomePage from '../../support/pages/HomePage';
 import ProductPage from "../../support/pages/ProductPage";
 import CartPage from "../../support/pages/CartPage";
@@ -47,40 +47,45 @@ When('I click in a product', () => {
     homePage.clickFirstProductCard()
 })
 
-And('I add the product to the cart', () => {
+And('I add a product to the cart', () => {
     productPage.clickAddToCartButton();
     productPage.clickCartButton();
 })
 
-Then('I verify that the product is added to the cart successfully', () => {
-    cartPage.getCartTableCount().should('eq', 1)
+Then('I verify that the product is added to the cart', () => {
+    cartPage.getProductsInShoppingCart(1)
+})
+
+Given('I am on the shopping cart page', () => {
+    homePage.clickFirstProductCard();
 })
 
 When('I put a product in my shopping cart', () => {
-    homePage.clickFirstProductCard();
-    productPage.clickAddToCartButton();
     productPage.clickAddToCartButton();
     productPage.clickCartButton();
 })
 
-Then('I verify that i can buy the products in the cart successfully', () => {
-    cartPage.clickPlaceOrderButton();
-    cartPage.fillNameField('Test');
-    cartPage.fillCountryField('Colombia');
-    cartPage.fillCityField('Test');
-    cartPage.fillCreditCardField('123456789');
-    cartPage.fillMonthField('12');
-    cartPage.fillYearField('2021');
-    cartPage.clickPurchaseModalButton();
+And('I buy the product', () => {
+    cy.fixture('cartFormData').then( cartFormData => {
+        cartPage.clickPlaceOrderButton();
+        cartPage.fillNameField(cartFormData.name);
+        cartPage.fillCountryField(cartFormData.country);
+        cartPage.fillCityField(cartFormData.city);
+        cartPage.fillCreditCardField(cartFormData.creditCard);
+        cartPage.fillMonthField(cartFormData.month);
+        cartPage.fillYearField(cartFormData.year);
+        cartPage.clickPurchaseModalButton();
+    });
+})
 
+Then('I verify that i can see the green check mark in the confirmation purchase modal', () => {
     cartPage.checkOkPurchaseCheckImageOrderModal().should('be.visible')
-    cartPage.checkOkPurchaseCheckTextOrderModal().should('be.visible')
 })
 
 And('I delete the product from the cart', () => {
-
+    cartPage.clickDeleteProductButton();    
 })
 
-Then('I verify that the product is deleted from the cart successfully', () => {
-    cartPage.getCartTableCount().should('eq', 2)
+Then('I verify that the cart is empty', () => {
+    cartPage.getProductsInShoppingCart(0)
 })

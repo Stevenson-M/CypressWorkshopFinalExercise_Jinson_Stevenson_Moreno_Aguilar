@@ -2,3 +2,4 @@
 /cypress/videos
 /allure-results
 /cucumber_report
+/cypress/screenshots

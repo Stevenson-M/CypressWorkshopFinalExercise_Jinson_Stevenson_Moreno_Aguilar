@@ -40,8 +40,10 @@ When('I click in the car button in the navbar', () => {
 })
 
 Then('I verify that the page is the cart page', () => {
-    homePage.checkUrl('/cart.html')
-    homePage.checkUrlStatus('/cart.html').should('eq', 200)
+    cy.fixture('productsEndpoint').then((cartUrl) => {
+    homePage.checkUrl(cartUrl.cart)
+    homePage.checkUrlStatus(cartUrl.cart).should('eq', 200)
+    })    
 })
 
 When('I click in the log in button in the navbar', () => {
@@ -59,5 +61,5 @@ When('I click in the sing up button in the navbar', () => {
 
 Then('I verify that the modal sing up is present with the correct title', () => {
     homePage.getSingUpModal().should('be.visible')
-    homePage.checkLogInModalTitle().should('eq', 'Log in')
+    homePage.checkSingUpModalTitle().should('eq', 'Sign up')
 })
