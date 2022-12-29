@@ -6,7 +6,10 @@
   "scripts": {
     "test": "npx cypress run",
     "allure": "npx cypress run --env allure=true",
-    "allure:results": "allure serve allure-results/"
+    "allure:results": "allure serve allure-results/",
+    "tag": "npx cypress-tags run -e TAGS=@sanity,@smoke,@regression,@carousel,@carouselItemsNumber,@carouselLeftArrow,@carouselRightArrow,@navbar,@contactButton,@aboutUsButton,@cartButton,@logInButton,@singUpButton,@products,@productsCategoryTable,@phonesCategory,@laptopsCategory,@monitorsCategory,@productsAddToCart,@buyCartProcess,@deleteCartProductProcess"
+
+
   },
   "keywords": [],
   "author": "",
@@ -18,6 +21,7 @@
     "cypress-cucumber-preprocessor": "^4.3.1"
   },
   "cypress-cucumber-preprocessor": {
-    "nonGlobalStepDefinitions": true
+    "nonGlobalStepDefinitions": true,
+    "filterSpecs": true
   }
 }
