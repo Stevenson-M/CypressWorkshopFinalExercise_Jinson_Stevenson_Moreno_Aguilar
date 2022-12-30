@@ -1,6 +1,6 @@
 @products
 
-Feature: Carousel check
+Feature: Products check
 
     As an user I'm gonna check if actions related to the products works as expected
 
