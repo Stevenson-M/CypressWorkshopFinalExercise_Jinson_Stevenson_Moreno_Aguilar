@@ -1,9 +1,5 @@
 # Cypress Workshop Final Excersie
 
-## Table of Contents
-
-[TOCM]
-
 ## Description: 
 
 In this project, automated tests are carried out on the web application https://www.demoblaze.com/ using Cypress(9.7.0) and Allure report.
@@ -26,13 +22,13 @@ The neccesary scripts to run the tests are in the folder `cypress/package.json`.
        
    *  ` npm run open`: Run the project by using Cypress interface.
     
- * `npx cypress run`: Run the project in a headless mode.
+   * `npx cypress run`: Run the project in a headless mode.
       
- * `npx cypress run --env allure=true`: Run the project in a headless mode by  using Allure Framework as the reporter.
+   * `npx cypress run --env allure=true`: Run the project in a headless mode by  using Allure Framework as the reporter.
     
- * `allure serve allure-results/`: Open Allure reports that were previously generated.
+   * `allure serve allure-results/`: Open Allure reports that were previously generated.
     
- * `npm run tag`: Run the project in a headless mode. The tag must be modified to the desired one.
+   * `npm run tag`: Run the project in a headless mode. The tag must be modified to the desired one.
 
 
 ### Setup 
