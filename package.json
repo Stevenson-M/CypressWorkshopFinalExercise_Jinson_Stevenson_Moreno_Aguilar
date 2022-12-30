@@ -4,24 +4,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx cypress run"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Stevenson-M/CypressWorkshopFinalExercise_Jinson_Stevenson_Moreno_Aguilar.git"
+    "test": "npx cypress run",
+    "allure": "npx cypress run --env allure=true",
+    "allure:results": "allure serve allure-results/",
+    "tag": "npx cypress-tags run -e TAGS=@sanity,@smoke,@regression,@carousel,@carouselItemsNumber,@carouselLeftArrow,@carouselRightArrow,@navbar,@contactButton,@aboutUsButton,@cartButton,@logInButton,@singUpButton,@products,@productsCategoryTable,@phonesCategory,@laptopsCategory,@monitorsCategory,@productsAddToCart,@buyCartProcess,@deleteCartProductProcess"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Stevenson-M/CypressWorkshopFinalExercise_Jinson_Stevenson_Moreno_Aguilar/issues"
-  },
-  "homepage": "https://github.com/Stevenson-M/CypressWorkshopFinalExercise_Jinson_Stevenson_Moreno_Aguilar#readme",
   "devDependencies": {
+    "@shelex/cypress-allure-plugin": "^2.34.0",
+    "allure-commandline": "^2.20.1",
     "cypress": "^9.7.0",
     "cypress-cucumber-preprocessor": "^4.3.1"
   },
   "cypress-cucumber-preprocessor": {
-    "nonGlobalStepDefinitions": true
+    "nonGlobalStepDefinitions": true,
+    "filterSpecs": true
   }
 }

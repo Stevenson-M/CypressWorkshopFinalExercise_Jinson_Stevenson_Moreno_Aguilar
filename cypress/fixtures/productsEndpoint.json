@@ -1,0 +1,5 @@
+{
+  "cart": "/cart.html",
+  "categories": "https://api.demoblaze.com/bycat",
+  "shoppingCartView": "https://api.demoblaze.com/viewcart"
+}
